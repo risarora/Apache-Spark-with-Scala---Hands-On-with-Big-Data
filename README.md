@@ -55,3 +55,91 @@ Hello world! The u.data file has 1825 lines.
 ```
 ## RDD Operations
 ![image](https://user-images.githubusercontent.com/4485129/119278753-f3433c80-bc44-11eb-95a8-350ba1e69e83.png)
+
+
+Transformation -> new RDD
+Action -> Result
+### Ways pf Operations 
+* Batch Mode
+* Interative mode 
+* Streaming Mode
+
+## Yahoo Use-Case
+## Apache Spark Architecture
+## RDD
+## Spark Architecture
+## Demo
+## Spark RDD
+## Spark Applications
+## Need For RDDs
+## What are RDDs?
+## Sources of RDDs
+## Features of RDDs
+## Creation of RDDs
+## Operations Performed On RDDs
+## Narrow Transformations
+## Wide Transformations
+## Actions
+## RDDs Using Spark Pokemon Use-Case
+## Spark DataFrame
+## What is a DataFrame?
+## Why Do We Need Dataframes?
+## Features of DataFrames
+## Sources Of DataFrames
+## Creation Of DataFrame
+## Spark SQL
+## Why Spark SQL?
+## Spark SQL Advantages Over Hive 
+## Spark SQL Success Story 
+## Spark SQL Features 
+## Spark SQL Architecture
+## Spark SQL Libraries
+## Querying Using Spark SQL
+## Adding Schema To RDDs
+## Hive Tables
+## Use Case: Stock Market Analysis with Spark SQL
+## Spark Streaming 
+## What is Streaming?
+## Spark Streaming Overview
+## Spark Streaming workflow
+## Streaming Fundamentals
+## DStream
+## Input DStreams
+## Transformations on DStreams
+## DStreams Window
+## Caching/Persistence
+## Accumulators
+## Broadcast Variables
+## Checkpoints
+## Use-Case Twitter Sentiment Analysis
+## Spark MLlib
+## MLlib Techniques
+## Demo
+## Use Case: Earthquake Detection Using Spark 
+## Visualizing Result
+## Spark GraphX
+## Basics of Graph
+## Types of Graph
+## GraphX
+## Property Graph
+## Creating & Transforming Property Graph
+## Graph Builder
+## Vertex RDD
+## Edge RDD
+## Graph Operators
+## GraphX Demo
+## Graph Algorithms
+## PageRank
+## Connected Components
+## Triangle Counting 
+## Spark GraphX Demo
+## MapReduce vs Spark
+## Kafka with Spark Streaming
+## Messaging System
+## Kafka Components
+## Kafka Cluster
+## Demo
+## Kafka  Spark Streaming Demo
+## PySpark Tutorial
+## PySpark Installation
+## Spark Interview Questions
