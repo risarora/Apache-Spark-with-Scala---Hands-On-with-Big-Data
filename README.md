@@ -64,11 +64,58 @@ Action -> Result
 * Interative mode 
 * Streaming Mode
 
-## Yahoo Use-Case
 ## Apache Spark Architecture
+
+![SparkArchitecture](https://user-images.githubusercontent.com/4485129/119298265-497ea280-bc7a-11eb-90c3-5e38bfc5ed63.PNG)
+
+
+Spark has 
+* Spark SQL
+* Spark Streaming
+* Spark MLib
+* GraphX
+* Spark R
+
+Spark code can be written in 
+* Python
+* R
+* Java
+* Scala - Core spark language on which spark is written
+
+
 ## RDD
+
+The original paper that gave birth to the concept of RDD is Resilient Distributed Datasets: [A Fault-Tolerant Abstraction for In-Memory Cluster Computing](https://www.cs.berkeley.edu/~matei/papers/2012/nsdi_spark.pdf) by Matei Zaharia, et al.
+
+*Resilient Distributed Datasets (RDDs) are a distributed memory abstraction that lets programmers perform in-memory computations on large clusters in a fault-tolerant manner.*
+
+Learning about RDD by its name:
+
+* **Resilient**, i.e. fault-tolerant with the help of RDD lineage graph and so able to recompute missing or damaged partitions due to node failures.
+* **Distributed** with data residing on multiple nodes in a cluster.
+* **Dataset** is a collection of partitioned data with primitive values or values of values, e.g. tuples or other objects (that represent records of the data you work with).
+
+
+Beside the above traits (that are directly embedded in the name of the data abstraction - RDD) it has the following additional traits:
+
+In-Memory, i.e. data inside RDD is stored in memory as much (size) and long (time) as possible.
+
+Immutable or Read-Only, i.e. it does not change once created and can only be transformed using transformations to new RDDs.
+
+Lazy evaluated, i.e. the data inside RDD is not available or transformed until an action is executed that triggers the execution.
+
+Cacheable, i.e. you can hold all the data in a persistent "storage" like memory (default and the most preferred) or disk (the least preferred due to access speed).
+
+Parallel, i.e. process data in parallel.
+
+Typed, i.e. values in a RDD have types, e.g. RDD[Long] or RDD[(Int, String)].
+
+Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) and then distributed across nodes in a cluster (one partition per JVM that may or may not correspond to a single node).
+
 ## Spark Architecture
+
 ## Demo
+
 ## Spark RDD
 ## Spark Applications
 ## Need For RDDs
