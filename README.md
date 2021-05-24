@@ -113,6 +113,7 @@ Typed, i.e. values in a RDD have types, e.g. RDD[Long] or RDD[(Int, String)].
 Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) and then distributed across nodes in a cluster (one partition per JVM that may or may not correspond to a single node).
 
 ## Spark Architecture
+![image](https://user-images.githubusercontent.com/4485129/119299413-8055b800-bc7c-11eb-93ba-8497aaa887f3.png)
 
 ## Demo
 
