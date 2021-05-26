@@ -98,24 +98,63 @@ Learning about RDD by its name:
 
 Beside the above traits (that are directly embedded in the name of the data abstraction - RDD) it has the following additional traits:
 
-In-Memory, i.e. data inside RDD is stored in memory as much (size) and long (time) as possible.
-
-Immutable or Read-Only, i.e. it does not change once created and can only be transformed using transformations to new RDDs.
-
-Lazy evaluated, i.e. the data inside RDD is not available or transformed until an action is executed that triggers the execution.
-
-Cacheable, i.e. you can hold all the data in a persistent "storage" like memory (default and the most preferred) or disk (the least preferred due to access speed).
-
-Parallel, i.e. process data in parallel.
-
-Typed, i.e. values in a RDD have types, e.g. RDD[Long] or RDD[(Int, String)].
-
-Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) and then distributed across nodes in a cluster (one partition per JVM that may or may not correspond to a single node).
+* In-Memory, i.e. data inside RDD is stored in memory as much (size) and long (time) as possible.
+* Immutable or Read-Only, i.e. it does not change once created and can only be transformed using transformations to new RDDs.
+* Lazy evaluated, i.e. the data inside RDD is not available or transformed until an action is executed that triggers the execution.
+* Cacheable, i.e. you can hold all the data in a persistent "storage" like memory (default and the most preferred) or disk (the least preferred due to access speed).
+* Parallel, i.e. process data in parallel.
+* Typed, i.e. values in a RDD have types, e.g. RDD[Long] or RDD[(Int, String)].
+* Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) and then distributed across nodes in a cluster (one partition per JVM that may or may not correspond to a single node).
 
 ## Spark Architecture
 ![image](https://user-images.githubusercontent.com/4485129/119299413-8055b800-bc7c-11eb-93ba-8497aaa887f3.png)
 
-## Demo
+## Spark Architecture
+![image](https://user-images.githubusercontent.com/4485129/119299413-8055b800-bc7c-11eb-93ba-8497aaa887f3.png)
+
+### Spark Architecture Overview
+Apache Spark follows a master/slave architecture with two main daemons and a cluster manager –
+
+* Master Daemon – (Master/Driver Process)
+* Worker Daemon –(Slave Process)
+
+A spark cluster has a single Master and any number of Slaves/Workers. The driver and the executors run their individual Java processes and users can run them on the same horizontal spark cluster or on separate machines i.e. in a vertical spark cluster or in mixed machine configuration.
+### Role of Driver in Spark Architecture
+#### Spark Driver – Master Node of a Spark Application
+
+ It is the central point and the entry point of the Spark Shell (Scala, Python, and R). The driver program runs the main () function of the application and is the place where the Spark Context is created. Spark Driver contains various components – DAGScheduler, TaskScheduler, BackendScheduler and BlockManager responsible for the translation of spark user code into actual spark jobs executed on the cluster.
+
+* The driver program that runs on the master node of the spark cluster schedules the job execution and negotiates with the cluster manager.
+* It translates the RDD’s into the execution graph and splits the graph into multiple stages.
+* Driver stores the metadata about all the Resilient Distributed Databases and their partitions.
+* Cockpits of Jobs and Tasks Execution -Driver program converts a user application into smaller execution units known as tasks. Tasks are then executed by the executors i.e. the worker processes which run individual tasks.
+* Driver exposes the information about the running spark application through a Web UI at port 4040.
+
+#### Role of Executor in Spark Architecture
+Executor is a distributed agent responsible for the execution of tasks. Every spark applications has its own executor process. Executors usually run for the entire lifetime of a Spark application and this phenomenon is known as “Static Allocation of Executors”. However, users can also opt for dynamic allocations of executors wherein they can add or remove spark executors dynamically to match with the overall workload.
+
+* Executor performs all the data processing.
+* Reads from and Writes data to external sources.
+* Executor stores the computation results data in-memory, cache or on hard disk drives.
+* Interacts with the storage systems.
+
+#### Role of Cluster Manager in Spark Architecture
+An external service responsible for acquiring resources on the spark cluster and allocating them to a spark job. There are 3 different types of cluster managers a Spark application can leverage for the allocation and deallocation of various physical resources such as memory for client spark jobs, CPU memory, etc. Hadoop YARN, Apache Mesos or the simple standalone spark cluster manager either of them can be launched on-premise or in the cloud for a spark application to run.
+
+Choosing a cluster manager for any spark application depends on the goals of the application because all cluster managers provide different set of scheduling capabilities. To get started with apache spark, the standalone cluster manager is the easiest one to use when developing a new spark application.
+
+
+#### Understanding the Run Time Architecture of a Spark Application
+###### What happens when a Spark Job is submitted?
+When a client submits a spark user application code, the driver implicitly converts the code containing transformations and actions into a logical directed acyclic graph (DAG). At this stage, the driver program also performs certain optimizations like pipelining transformations and then it converts the logical DAG into physical execution plan with set of stages. After creating the physical execution plan, it creates small physical execution units referred to as tasks under each stage. Then tasks are bundled to be sent to the Spark Cluster.
+
+The driver program then talks to the cluster manager and negotiates for resources. The cluster manager then launches executors on the worker nodes on behalf of the driver. At this point the driver sends tasks to the cluster manager based on data placement. Before executors begin execution, they register themselves with the driver program so that the driver has holistic view of all the executors. Now executors start executing the various tasks assigned by the driver program. At any point of time when the spark application is running, the driver program will monitor the set of executors that run. Driver program in the spark architecture also schedules future tasks based on data placement by tracking the location of cached data. When driver programs main () method exits or when it call the stop () method of the Spark Context, it will terminate all the executors and release the resources from the cluster manager.
+
+The structure of a Spark program at higher level is - RDD's are created from the input data and new RDD's are derived from the existing RDD's using different transformations, after which an action is performed on the data. In any spark program, the DAG operations are created by default and whenever the driver runs the Spark DAG will be converted into a physical execution plan.
+
+##### Launching a Spark Program
+spark-submit is the single script used to submit a spark program and launches the application on the cluster. There are multiple options through which spark-submit script can connect with different cluster managers and control on the number of resources the application gets. For few cluster managers, spark-submit can run the driver within the cluster like in YARN on worker node whilst for others it runs only on local machines.
+
 
 ## Spark RDD
 ## Spark Applications
@@ -125,9 +164,32 @@ Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) a
 ## Features of RDDs
 ## Creation of RDDs
 ## Operations Performed On RDDs
+
 ## Narrow Transformations
+* Narrow Transformation is applied to single partition of parent RDD
+* as the data rquired is available on single partition of parent RDD
+
+Example operations of narrow transformation are :-
+* map()
+* filter()
+* flatmap()
+* partition()
+* mappartitions()
 ## Wide Transformations
+* Wide Transformation is applied to multiple partitions of an RDD
+* as the data required is present across on multiple partitions of parent RDD
+
+Example operations of wide transformation are :-
+* reduceby()
+* union()
+
 ## Actions
+
+* collect() 
+* count()
+* date()
+* first()
+
 ## RDDs Using Spark Pokemon Use-Case
 ## Spark DataFrame
 ## What is a DataFrame?
