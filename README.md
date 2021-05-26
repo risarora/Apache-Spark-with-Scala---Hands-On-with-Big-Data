@@ -195,3 +195,4 @@ Partitioned, i.e. the data inside a RDD is partitioned (split into partitions) a
 https://stackoverflow.com/questions/32621990/what-are-workers-executors-cores-in-spark-standalone-cluster
 https://stackoverflow.com/questions/63914667/what-is-the-difference-between-driver-and-application-manager-in-spark
 
+https://github.com/srinathkr07/IPL-Data-Analysis/blob/master/matches.csv
