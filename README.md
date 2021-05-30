@@ -286,3 +286,4 @@ https://stackoverflow.com/questions/32621990/what-are-workers-executors-cores-in
 https://stackoverflow.com/questions/63914667/what-is-the-difference-between-driver-and-application-manager-in-spark
 
 https://github.com/srinathkr07/IPL-Data-Analysis/blob/master/matches.csv
+https://www.edureka.co/blog/rdd-using-spark/
