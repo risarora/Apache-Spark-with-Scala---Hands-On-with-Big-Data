@@ -193,14 +193,38 @@ Example operations of wide transformation are :-
 * first()
 
 ## RDDs Using Spark Pokemon Use-Case
-
 [Pokemon Case Study](./PokemonCaseStudy.md)
+
 ## Spark DataFrame
-## What is a DataFrame?
-## Why Do We Need Dataframes?
-## Features of DataFrames
-## Sources Of DataFrames
-## Creation Of DataFrame
+* Distributed collection of data 
+* Organized in collection of rows under named columns
+* Filter, Group and Aggregate Opeariions are performed
+* Used with Spark SQL
+* Constructed from many sources
+* Hive, Hbase, cassandra, RDD  
+
+### What is a DataFrame?
+* R, python, scala and Java
+
+### Why Do We Need Dataframes?
+
+### Features of DataFrames
+* Immutability
+* fault tolereent
+* Distributed
+* Lazy Evalution
+
+### Sources Of DataFrames
+
+![image](https://user-images.githubusercontent.com/4485129/120116791-66016a00-c1a7-11eb-831c-5f212d5579eb.png)
+
+### Creation Of DataFrame
+
+
+### Data Frames Example
+#### Foot Ball Data analysis
+#### GOT Data analysis
+
 ## Spark SQL
 ## Why Spark SQL?
 ## Spark SQL Advantages Over Hive 
