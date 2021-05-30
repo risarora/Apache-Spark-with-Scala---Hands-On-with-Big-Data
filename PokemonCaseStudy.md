@@ -114,7 +114,7 @@ scala>
 
 ```
 
-#### get Pojkemoons with Minuimum Defence
+#### get Pokemons with Minimum Defence
 ```
 scala> val defenceList= NoHeader.map{x => x.split(',')}.map{ x=> (x(7).toDouble)}
 defenceList: org.apache.spark.rdd.RDD[Double] = MapPartitionsRDD[69] at map at <console>:25
@@ -129,4 +129,25 @@ scala> minDefenceList.take(4).foreach(println)
 20.0
 
 scala> 
+```
+
+### Get  names  of Pokemins with Min Defence 
+```
+scala> val defenceWithPokemonName= NoHeader.map{x => x.split(',')}.map{ x=> (x(7).toDouble,x(1))}
+defenceWithPokemonName: org.apache.spark.rdd.RDD[(Double, String)] = MapPartitionsRDD[81] at map at <console>:25
+
+scala> defenceWithPokemonName.take(4).foreach(println)
+(49.0,Bulbasaur)
+(63.0,Ivysaur)
+(83.0,Venusaur)
+(123.0,VenusaurMega Venusaur)
+
+scala> val MinDefencePokemon = defenceWithPokemonName.groupByKey.takeOrdered(1)(Ordering[Double].on(_._1))
+MinDefencePokemon: Array[(Double, Iterable[String])] = Array((5.0,CompactBuffer(Chansey, Happiny)))
+
+scala> MinDefencePokemon.take(4).foreach(println)
+(5.0,CompactBuffer(Chansey, Happiny))
+
+scala> 
+
 ```
