@@ -92,3 +92,41 @@ scala> println(defenceList.max())
 scala> 
 
 ```
+
+### Filter Pokemon Names with Max Defence
+```
+scala> val defenceWithPokemonName= NoHeader.map{x => x.split(',')}.map{ x=> (x(7).toDouble,x(1))}
+defenceWithPokemonName: org.apache.spark.rdd.RDD[(Double, String)] = MapPartitionsRDD[48] at map at <console>:25
+
+scala> defenceWithPokemonName.take(4).foreach(println)
+(49.0,Bulbasaur)
+(63.0,Ivysaur)
+(83.0,Venusaur)
+(123.0,VenusaurMega Venusaur)
+
+scala> val MaxDefencePokemon = defenceWithPokemonName.groupByKey.takeOrdered(1)(Ordering[Double].reverse.on(_._1))
+MaxDefencePokemon: Array[(Double, Iterable[String])] = Array((230.0,CompactBuffer(SteelixMega Steelix, Shuckle, AggronMega Aggron)))
+
+scala> MaxDefencePokemon.take(4).foreach(println)
+(230.0,CompactBuffer(SteelixMega Steelix, Shuckle, AggronMega Aggron))
+
+scala> 
+
+```
+
+#### get Pojkemoons with Minuimum Defence
+```
+scala> val defenceList= NoHeader.map{x => x.split(',')}.map{ x=> (x(7).toDouble)}
+defenceList: org.apache.spark.rdd.RDD[Double] = MapPartitionsRDD[69] at map at <console>:25
+
+scala> var minDefenceList= defenceList.distinct.sortBy(x=> x.toDouble,true,1)
+minDefenceList: org.apache.spark.rdd.RDD[Double] = MapPartitionsRDD[75] at sortBy at <console>:25
+
+scala> minDefenceList.take(4).foreach(println)
+5.0
+10.0
+15.0
+20.0
+
+scala> 
+```
