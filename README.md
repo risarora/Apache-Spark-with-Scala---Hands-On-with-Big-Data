@@ -220,6 +220,48 @@ Example operations of wide transformation are :-
 
 ### Creation Of DataFrame
 
+```
+scala> import org.apache.spark.sql.Row
+import org.apache.spark.sql.Row
+
+scala> val empData = Seq(Row("Alice", 24), Row("Bob", 26))
+empData: Seq[org.apache.spark.sql.Row] = List([Alice,24], [Bob,26])
+
+scala> import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType};
+import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType}
+```
+#### Define the Schema
+```
+scala> val empSchema = List(StructField("name", StringType, true), StructField("age", IntegerType, true))
+empSchema: List[org.apache.spark.sql.types.StructField] = List(StructField(name,StringType,true), StructField(age,IntegerType,true))
+
+```
+
+#### Create the DataFrame
+```
+scala> val empDataFrame = spark.createDataFrame(spark.sparkContext.parallelize(empData), StructType(empSchema))
+empDataFrame: org.apache.spark.sql.DataFrame = [name: string, age: int]
+
+```
+#### Print the dataframe and the Schema
+
+```
+scala> empDataFrame.printSchema()
+root
+ |-- name: string (nullable = true)
+ |-- age: integer (nullable = true)
+
+
+scala> empDataFrame.show()
++-----+---+
+| name|age|
++-----+---+
+|Alice| 24|
+|  Bob| 26|
++-----+---+
+scala> 
+```
+
 
 ### Data Frames Example
 #### Foot Ball Data analysis
