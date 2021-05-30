@@ -111,7 +111,7 @@ Beside the above traits (that are directly embedded in the name of the data abst
 
 ## Spark Architecture
 ![image](https://user-images.githubusercontent.com/4485129/119299413-8055b800-bc7c-11eb-93ba-8497aaa887f3.png)
-
+<details>
 ### Spark Architecture Overview
 Apache Spark follows a master/slave architecture with two main daemons and a cluster manager –
 
@@ -155,6 +155,7 @@ The structure of a Spark program at higher level is - RDD's are created from the
 ##### Launching a Spark Program
 spark-submit is the single script used to submit a spark program and launches the application on the cluster. There are multiple options through which spark-submit script can connect with different cluster managers and control on the number of resources the application gets. For few cluster managers, spark-submit can run the driver within the cluster like in YARN on worker node whilst for others it runs only on local machines.
 
+ </details>
 
 ## Spark RDD
 ## Spark Applications
@@ -175,6 +176,7 @@ Example operations of narrow transformation are :-
 * flatmap()
 * partition()
 * mappartitions()
+
 ## Wide Transformations
 * Wide Transformation is applied to multiple partitions of an RDD
 * as the data required is present across on multiple partitions of parent RDD
@@ -191,6 +193,8 @@ Example operations of wide transformation are :-
 * first()
 
 ## RDDs Using Spark Pokemon Use-Case
+
+[Pokemon Case Study](./PokemonCaseStudy.md)
 ## Spark DataFrame
 ## What is a DataFrame?
 ## Why Do We Need Dataframes?
