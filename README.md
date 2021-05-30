@@ -218,8 +218,7 @@ Example operations of wide transformation are :-
 
 ![image](https://user-images.githubusercontent.com/4485129/120116791-66016a00-c1a7-11eb-831c-5f212d5579eb.png)
 
-### Creation Of DataFrame
-
+### Creation Of a simple DataFrame Example 1
 ```
 scala> import org.apache.spark.sql.Row
 import org.apache.spark.sql.Row
@@ -227,11 +226,12 @@ import org.apache.spark.sql.Row
 scala> val empData = Seq(Row("Alice", 24), Row("Bob", 26))
 empData: Seq[org.apache.spark.sql.Row] = List([Alice,24], [Bob,26])
 
-scala> import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType};
-import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType}
 ```
 #### Define the Schema
 ```
+scala> import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType};
+import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType}
+
 scala> val empSchema = List(StructField("name", StringType, true), StructField("age", IntegerType, true))
 empSchema: List[org.apache.spark.sql.types.StructField] = List(StructField(name,StringType,true), StructField(age,IntegerType,true))
 
@@ -261,7 +261,53 @@ scala> empDataFrame.show()
 +-----+---+
 scala> 
 ```
+### Creation Of a simple DataFrame Example 2
+```
+scala> val data = Seq(
+     |  Row("James","","Smith","1991-04-01","M",3000), 
+     |  Row("Michael","Rose","","2000-05-19","M",4000), 
+     |  Row("Robert","","Williams","1978-09-05","M",4000), 
+     |  Row("Maria","Anne","Jones","1967-12-01","F",4000), 
+     |  Row("Jen","Mary","Brown","1980-02-17","F",-1) 
+     |  )
+data: Seq[org.apache.spark.sql.Row] = List([James,,Smith,1991-04-01,M,3000], [Michael,Rose,,2000-05-19,M,4000], [Robert,,Williams,1978-09-05,M,4000], [Maria,Anne,Jones,1967-12-01,F,4000], [Jen,Mary,Brown,1980-02-17,F,-1])
 
+scala> 
+
+scala> val columns = List(
+     | StructField("firstname",StringType,true),
+     | StructField("middlename",StringType,true),
+     | StructField("lastname",StringType,true),
+     | StructField("dob",StringType,true),
+     | StructField("gender",StringType,true),
+     | StructField("salary",IntegerType,true))
+columns: List[org.apache.spark.sql.types.StructField] = List(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true), StructField(dob,StringType,true), StructField(gender,StringType,true), StructField(salary,IntegerType,true))
+
+scala> val empDataFrame = spark.createDataFrame(spark.sparkContext.parallelize(data), StructType(columns))
+empDataFrame: org.apache.spark.sql.DataFrame = [firstname: string, middlename: string ... 4 more fields]
+
+scala> empDataFrame.printSchema()
+root
+ |-- firstname: string (nullable = true)
+ |-- middlename: string (nullable = true)
+ |-- lastname: string (nullable = true)
+ |-- dob: string (nullable = true)
+ |-- gender: string (nullable = true)
+ |-- salary: integer (nullable = true)
+
+
+scala> empDataFrame.show()
++---------+----------+--------+----------+------+------+
+|firstname|middlename|lastname|       dob|gender|salary|
++---------+----------+--------+----------+------+------+
+|    James|          |   Smith|1991-04-01|     M|  3000|
+|  Michael|      Rose|        |2000-05-19|     M|  4000|
+|   Robert|          |Williams|1978-09-05|     M|  4000|
+|    Maria|      Anne|   Jones|1967-12-01|     F|  4000|
+|      Jen|      Mary|   Brown|1980-02-17|     F|    -1|
++---------+----------+--------+----------+------+------+
+
+```
 
 ### Data Frames Example
 #### Foot Ball Data analysis
