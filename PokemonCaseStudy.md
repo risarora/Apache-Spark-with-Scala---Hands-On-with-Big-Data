@@ -27,3 +27,38 @@ scala>
 
 
 ```
+
+
+### Find Number of Water and fire type Pokemon
+
+```
+                                         ^
+
+scala> val WaterRDD = pokemonData.filter(line => line.contains("water"))
+WaterRDD: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[4] at filter at <console>:25
+
+scala> WaterRDD.collect().foreach(println)
+7,squirtle,0.708672,water,,wartortle
+8,wartortle,0.748101,water,,blastoise
+9,blastoise,0.64938,water,,
+54,psyduck,0.798752,water,,golduck
+
+
+
+scala> val FireRDD = pokemonData.filter(line => line.contains("fire"))
+FireRDD: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[5] at filter at <console>:25
+
+scala> FireRDD.collect().foreach(println)
+4,charmander,0.724984,fire,,charmeleon
+5,charmeleon,0.491232,fire,,charizard
+6,charizard,0.601881,fire,flying,
+37,vulpix,0.555764,fire,,ninetales
+
+scala> WaterRDD.count()
+res8: Long = 117
+
+scala> FireRDD.count()
+res9: Long = 55
+
+
+```
