@@ -317,6 +317,7 @@ scala> empDataFrame.show()
 [GOT Data Analysis](GOTAnalysis.md)
 
 ## Spark SQL
+
 ### Why Spark SQL?
 ### Spark SQL Advantages Over Hive 
 ### Spark SQL Success Story 
