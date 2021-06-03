@@ -153,3 +153,6 @@ scala> (flightData2011.groupBy("DEST_COUNTRY_NAME").count().take(10).foreach(pri
 scala> 
 
 ```
+
+#### References
+* https://stackoverflow.com/questions/29383578/how-to-convert-rdd-object-to-dataframe-in-spark
